@@ -1,38 +1,107 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+  background:#262626;
+  color:#fff;
+  min-width: 350px;
+  font-family: 'Open Sans', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-family: 'Pacifico', cursive;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container {
+  margin:50px auto;
+  text-align:center;
+  width: 100%;
+  max-width: 800px;
+  
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#pomodoro {
+  margin: 0 auto;
+  position: relative;
+  padding: 0px 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.tomato {
+  width:280px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+#timer-label {
+  position: absolute;
+  top: 30%;
+  left:16%;
+  font-size: 2em;
+  width: 70%;
+  color: #efc4c4;
+}
+
+#time-left {
+  color: #fff;
+  font-size: 3.5em;
+  font-weight: bold;
+  position: absolute;
+  top: 42%;
+  left: 40%;
+}
+
+.btn {
+  margin: 5px;
+  padding: 15px 20px;
+  background:#262626;
+  color:white;
+  font-size: 1rem;
+  cursor:pointer;
+  border: 2px solid white;
+  border-radius:30%;
+}
+
+.btn:focus {
+  outline:none;
+}
+
+#start_stop {
+  position:absolute;
+  top:70%;
+  left:44%;
+  width:100px;
+  height:40px;
+  background:#fff;
+  color:#E23C3D;
+  border-radius:10%;
+  padding:10px;
+  font-size:.8rem;
+}
+
+.settings {
+  margin:30px;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
+#reset {
+  height:50px;
+  background:#262626;
+  color:white;
+}
+
+.session p, .break p {
+  color: #fff;
+  padding:5px 30px;
+  border-radius:5px;
+}
+
+.btn-wrapper {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+#break-length, #session-length {
+  font-size:2rem;
 }
