@@ -13,7 +13,6 @@ class App extends React.Component{
   }  
   
   convertToTime = (seconds) => {
-    const { timeLeft } = this.state;
     const mins = Math.floor(seconds/60);
     const secondsLeft = seconds%60;
     const display = `${mins < 10 ? '0' : ''}${mins}:${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
@@ -21,13 +20,13 @@ class App extends React.Component{
   }
   
   startCounting = () => {
-    const { timeLeft, pauseClicked, buttonText } = this.state;
+    const { timeLeft} = this.state;
     const now = Date.now();
     const then = now + timeLeft*1000;
     
     this.setState({
       countdown:setInterval(() => {
-        const { timeLeft, pauseClicked, countdown, buttonText, breakLength, sessionLength, timerLabel } = this.state;
+        const {  breakLength, sessionLength, timerLabel } = this.state;
         const audio = document.getElementById('beep');
         const secondsLeft = Math.round((then - Date.now())/1000);
         
@@ -59,7 +58,7 @@ class App extends React.Component{
 }
   
   stopCounting = () => {
-    const { pauseClicked, countdown, buttonText } = this.state;
+    const { countdown } = this.state;
   
   this.setState({ 
     pauseClicked: false,
@@ -78,7 +77,7 @@ class App extends React.Component{
   
  
   handleSettings = (e) => {
-    const {sessionLength, breakLength, timerLabel, timeLeft, pauseClicked, buttonText} = this.state;
+    const {sessionLength, breakLength} = this.state;
     
     switch (e.target.id) {      
       case 'session-decrement':{
