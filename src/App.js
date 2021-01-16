@@ -162,7 +162,7 @@ class App extends React.Component{
             
           </div>
           
-          <button id="reset" className="btn" onClick={this.reset} onClick={this.handleSettings}><i className="fas fa-redo"></i></button>
+          <button id="reset" className="btn" onClick={this.reset}><i className="fas fa-redo"></i></button>
         
           <div className="break">
             <p id="break-label">Break Length</p>
