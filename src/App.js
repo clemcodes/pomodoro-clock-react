@@ -143,7 +143,7 @@ class App extends React.Component{
         <h1>Pomodoro Clock</h1>
         
         <div id="pomodoro">
-          <img className="tomato" src="https://pngimg.com/uploads/tomato/tomato_PNG12599.png"/>
+          <img className="tomato" src="https://pngimg.com/uploads/tomato/tomato_PNG12599.png" alt="tomato"/>
           <div id="timer-label">{timerLabel}</div>
           <div id="time-left">{this.convertToTime(timeLeft)}</div>
           <button id="start_stop" className="btn" onClick={this.changePause}>{ buttonText === 'Pause' ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i> } {buttonText}</button>        
