@@ -33,62 +33,62 @@ class App extends React.Component{
         if(secondsLeft === 0){
           audio.play();
         }
-
-      if(secondsLeft < 0) {
-        this.setState({            
+        
+        if(secondsLeft < 0) {
+          this.setState({            
             timerLabel: timerLabel === 'Session' ? 'Break' : 'Session',
             timeLeft: timerLabel === 'Session' ? breakLength*60 : sessionLength*60,
             
           });
-        
-        this.stopCounting();
-        this.startCounting();
-        
-        return;
+          
+          this.stopCounting();
+          this.startCounting();
+          
+          return;
         }
         
         this.setState({
-        timeLeft:secondsLeft
-       })
-    
-    },1000),
+          timeLeft:secondsLeft
+        })
+        
+      },1000),
       pauseClicked: true,
       buttonText:'Pause'
     })
-}
+  }
   
   stopCounting = () => {
     const { countdown } = this.state;
-  
-  this.setState({ 
-    pauseClicked: false,
-    buttonText: 'Resume',
-    countdown:clearInterval(countdown)
-  })
-}
+    
+    this.setState({ 
+      pauseClicked: false,
+      buttonText: 'Resume',
+      countdown:clearInterval(countdown)
+    })
+  }
   
   changePause = () => {
-  if(this.state.pauseClicked){
-    this.stopCounting()
-  } else {
-    this.startCounting()
+    if(this.state.pauseClicked){
+      this.stopCounting()
+    } else {
+      this.startCounting()
+    }
   }
-}
   
- 
+  
   handleSettings = (e) => {
     const {sessionLength, breakLength} = this.state;
     
     switch (e.target.id) {      
       case 'session-decrement':{
-         this.setState({
+        this.setState({
           sessionLength: sessionLength <= 1 ? 1 : sessionLength - 1,
-           timeLeft:(sessionLength <= 1 ? 1 : sessionLength - 1)*60,
-           timerLabel:'Session'
+          timeLeft:(sessionLength <= 1 ? 1 : sessionLength - 1)*60,
+          timerLabel:'Session'
         });
         break;
       }
-        
+      
       case 'session-increment':{
         this.setState({
           sessionLength:sessionLength >= 60 ? 60 : sessionLength + 1,
@@ -97,12 +97,12 @@ class App extends React.Component{
         });
         break;
       } 
-        
+      
       case 'break-decrement':{
-         this.setState({
+        this.setState({
           breakLength: breakLength <= 1 ? 1 : breakLength - 1,
           timeLeft: (breakLength <= 1 ? 1 : breakLength - 1)*60,
-           timerLabel:'Break'
+          timerLabel:'Break'
         });
         break;
       }
@@ -115,7 +115,7 @@ class App extends React.Component{
         });
         break;
       } 
-       
+      
       default:{
         this.stopCounting();
         const audio = document.getElementById('beep');
@@ -132,55 +132,62 @@ class App extends React.Component{
         
       }     
     }
-
+    
   }
   
   render(){
+    
     const { sessionLength, breakLength, timeLeft, buttonText, timerLabel } = this.state;
+    
+    const timeLeftString = this.convertToTime(timeLeft);
+    if(buttonText == "Pause") document.title = timeLeftString;
+    else document.title = "Pomodoro Timer";
+    
     
     return (
       <div className="container">
-        <h1>Pomodoro Clock</h1>
-        
-        <div id="pomodoro">
-          <img className="tomato" src="https://pngimg.com/uploads/tomato/tomato_PNG12599.png" alt="tomato"/>
-          <div id="timer-label">{timerLabel}</div>
-          <div id="time-left">{this.convertToTime(timeLeft)}</div>
-          <button id="start_stop" className="btn" onClick={this.changePause}>{ buttonText === 'Pause' ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i> } {buttonText}</button>        
-        </div>
-        
-        <div className="settings">
-         
-          <div className="session">
-            <p id="session-label">Session Length</p>
-            <div className="btn-wrapper">
-              <button id="session-decrement" className="btn" onClick={this.handleSettings}>-</button>
-              <div id="session-length">{sessionLength}</div>
-              <button id="session-increment" className="btn" onClick={this.handleSettings}>+</button>
-            
-            </div>
-            
-          </div>
-          
-          <button id="reset" className="btn" onClick={this.handleSettings}><i className="fas fa-redo"></i></button>
-        
-          <div className="break">
-            <p id="break-label">Break Length</p>
-            <div className="btn-wrapper">
-              <button id="break-decrement" className="btn" onClick={this.handleSettings}>-</button>              
-              <div id="break-length">{breakLength}</div>
-              <button id="break-increment" className="btn" onClick={this.handleSettings}>+</button>
-              
-            </div>
-          </div>
-        </div>
-       
-        <audio
-          id="beep" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"/>
+      <h1>Pomodoro Clock</h1>
+      
+      <div id="pomodoro">
+      <img className="tomato" src="https://pngimg.com/uploads/tomato/tomato_PNG12599.png" alt="tomato"/>
+      <div id="timer-label">{timerLabel}</div>
+      <div id="time-left">{timeLeftString}</div>
+      <button id="start_stop" className="btn" onClick={this.changePause}>{ buttonText === 'Pause' ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i> } {buttonText}</button>        
       </div>
-    )
+      
+      <div className="settings">
+      
+      <div className="session">
+      <p id="session-label">Session Length</p>
+      <div className="btn-wrapper">
+      <button id="session-decrement" className="btn" onClick={this.handleSettings}>-</button>
+      <div id="session-length">{sessionLength}</div>
+      <button id="session-increment" className="btn" onClick={this.handleSettings}>+</button>
+      
+      </div>
+      
+      </div>
+      
+      <button id="reset" className="btn" onClick={this.handleSettings}><i className="fas fa-redo"></i></button>
+      
+      <div className="break">
+      <p id="break-label">Break Length</p>
+      <div className="btn-wrapper">
+      <button id="break-decrement" className="btn" onClick={this.handleSettings}>-</button>              
+      <div id="break-length">{breakLength}</div>
+      <button id="break-increment" className="btn" onClick={this.handleSettings}>+</button>
+      
+      </div>
+      </div>
+      </div>
+      
+      <audio
+      id="beep" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"/>
+      </div>
+      )
+    }
   }
-}
-
-
-export default App;
+  
+  
+  export default App;
+  
