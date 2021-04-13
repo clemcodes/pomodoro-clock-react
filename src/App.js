@@ -140,7 +140,7 @@ class App extends React.Component{
     const { sessionLength, breakLength, timeLeft, buttonText, timerLabel } = this.state;
     
     const timeLeftString = this.convertToTime(timeLeft);
-    if(buttonText == "Pause") document.title = timeLeftString;
+    if(buttonText === "Pause") document.title = timeLeftString;
     else document.title = "Pomodoro Timer";
     
     
